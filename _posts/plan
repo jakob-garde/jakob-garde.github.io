@@ -1,0 +1,137 @@
+
+
+Strategy:
+
+1) Finish projects
+2) Create a portfolio
+3) Notice any feedback
+
+- Show things I am proud of -> implying a certain amount of polish.
+- Finishing projects means picking a scope to park/pause/end a project, where it still makes sense as a tech demo+.
+- There should be some demonstrable output that isn't just code.
+- We aren't aiming at "good enough" or "it's what I have", but "interesting to look at".
+- Thus avoid slop, since it reflects badly. We shoud aim for is enough quality that it doesn't appear to be total "work in progress".
+- This means fixing bugs and having a stable interface.
+- Screenshots! Something to look at. Makes the article skim-able
+
+
+Format: 
+
+- What is interesting about this demo?
+- Show why this is so cool, focus on the result/outcome.
+- Reflect on what I learned from this project, and what I enjoyed about it.
+
+
+Example 01:
+
+A way to work with Header-Only Libraries
+
+Why is versioned header-only code so damn useful?
+What is unity build and why is it good? A word on complexity (duh).
+What is a header-only code unit and header guard.
+Automated "compilation" of the code
+Switching a library to dev-mode
+Example of what such libs could contain in the small scale
+Honorable mentions (stb, and many others)
+
+What I learned: 
+
+
+Example 02:
+
+Hand-rolled a parser for the mcstas DSL
+
+First of all, why (for users!)? The problem of error codes / API usability.
+Secondary advantages (for devs!): Ease of build/development, fewer dependencies, straight-forward code, access to internals.
+Disadvantages: Casually reading the code.
+Results, demonstrating that it does its thing, timing.
+
+What I learned:
+
+
+Example 03: 
+
+A visual flowchart compiler
+
+Some people love to play with drawing flowcharts in place of program code.
+Program flow vs. data flow (code is data).
+What about the goto's? Goto-elimination algorithms.
+Backend flowchart AST
+Backend AST modification algorithm (according to paper)
+Backend recursive AST to code generator
+What the output code looks like (this is facinating)
+
+What I learned: 
+- js is hard to debug (I understand why peopl would use TypeScript)
+- working with d3js was really cool (but slow)
+- OOP style becomes unmanageable
+- Why write things in JS when I am writing it as though it was C? -> The web is probably best for making websites, not custom applications!
+
+
+Example 04:
+
+Modernizing the mcstas legacy code base
+
+How things have changed, and why python doesn't cut it, anymore.
+What can we expect today?
+Porting to C++.
+Wrapping the runtime "simcore" library code into the unity build.
+Steps towards modernizing the code.
+
+What I learned:
+
+
+Example 05:
+
+Wireframe 3D user interface
+
+Why? Users: Light-weight editor/browser with great performance
+Why? It's a tech demo
+
+What I learned as a tech demo: Technical things
+- how to robustly drag & rotate an orbit camera
+- projected ray collisions with geometric objects
+- robustly drag objects within the plane, and along an axis (without any goddamn jitter)
+- the simplicity and robustness of immediate-mode rendering
+
+
+Example 05:
+
+Step-wise mcstas code generation and porting
+
+Why port to C++ and partical code generation? Because this can make the static DSL become a dynamic, visual editor
+
+
+Example 06:
+
+Exploring immediate-mode UI systems by building one
+
+An easy-to-use lightweight API for debug UI
+Expandable into becoming a game UI
+Expandable into becoming a tool UI
+
+What I learned: 
+- extracting and serializing font data
+- laying out text sprites on the screen
+- offline auto-layout algorithm
+- bit-flag based features combine into customizable types
+
+
+Other Examples:
+
+Tetris tech demo
+EAT-MAN tech demo
+Spotlight: len-based strings // std::string // StrLst // stringview
+    - scare story about the usage of std::string
+    - what I can accomplish with X lines of code (very few lines)
+    - what is great about C, and why simplicity is so good
+    - why being able to read the code is good
+OcTree ray tracing project (?)
+
+
+Far-out Examples ideas: 
+
+
+
+
+
