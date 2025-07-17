@@ -15,7 +15,7 @@ Originally graduated in physics, I discovered my strength in software developmen
 system-level software, hardware integration and simulation. Over the years I have developed 3D scanning tools and algorithms, 
 sea chart visualization, desktop applications, low-level communication infrastructure and CLI's.
 
-Some of my source code is posted [on github].
+Some of my code is posted [on github].
 
 
 [on github]: https://github.com/climbcat

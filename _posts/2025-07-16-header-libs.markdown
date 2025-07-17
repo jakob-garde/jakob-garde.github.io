@@ -1,8 +1,7 @@
 ---
 layout: post
-title:  "Baselayer"
-date:   2025-03-25 10:59:15 +0100
-categories: code project
+title:  "Working with your own header-only libraries"
+date:   2025-07-17 15:00:00 +0100
 ---
 
 Have you ever written a pointer-hash map? It is surprisingly fun and satisfying.
