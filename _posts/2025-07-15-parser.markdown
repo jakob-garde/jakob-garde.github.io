@@ -1,0 +1,6 @@
+---
+title:  "Parsing the McStas DSL with great error codes"
+---
+
+Some text about the manual parsing, test results, purpose, reflections.
+

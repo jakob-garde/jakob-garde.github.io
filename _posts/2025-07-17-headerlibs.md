@@ -1,8 +1,8 @@
 ---
-layout: post
-title:  "Working with your own header-only libraries"
-date:   2025-07-17 15:00:00 +0100
+title: "Working with your own header-only libraries"
 ---
+
+Org text:
 
 Have you ever written a pointer-hash map? It is surprisingly fun and satisfying.
 
