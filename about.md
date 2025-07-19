@@ -17,7 +17,8 @@ sea chart visualization, desktop applications, low-level communication infrastru
 
 ### About the content
 
-Recently I had a chance to work on my own to develop new skills (AKA being unemployed), an exciting opportunity which calls for a portfolio. Some projects that have caught on beyond the initial exploration are presented here in some form or another.
+Recently I had a chance to work on my own to develop new skills (AKA being unemployed), an exciting opportunity which calls for a portfolio.
+Projects that have caught on beyond the initial exploration are presented here in some form or another.
 
 Project source code is posted [on github].
 
