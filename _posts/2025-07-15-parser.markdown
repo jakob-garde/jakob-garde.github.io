@@ -1,6 +1,80 @@
 ---
-title:  "Parsing the McStas DSL with great error codes"
+title:  "Manually parsing the McStas DSL"
 ---
 
-Some text about the manual parsing, test results, purpose, reflections.
+
+The situation:
+
+A few years back while employed at DTU, we needed to update the default mcstas DSL parser. While open to minor adjustments, it was neigh impossible to give the code an overhaul and modernize.
+
+As a typical flex/bison implementaiton, it relies on meta-programming, with each change to the parsing-grammar a couple of build steps. This was automated using cmake, which is great for release processes, but could not be debugged.
+
+What is "a typical flex/bison implementation"? This is an old-school parser generator: A tool which outputs parser code that you can include in your source. It needs to be configured using two different text file formats - .l for the "lexer" and .y for the "grammar".
+
+The flex/bison generated parser is incomprehensible and can not read or debugged meaningfully, so developing the DSL consists of updating the configuration files, then running the entire build process, and seeing if your change works.
+
+Seeing whether it works means reading error codes, which weren't great. The flex/bison parser generator system does not allow for the configuration of error coders, so there are only default / generic error codes available. Which means they ... lack in usability. This means they are hard to read, and easy to misunderstand. 
+
+What I did:
+
+The result:
+
+
+------------
+
+Take # 2:
+
+At some point, while practicing and learning to write modern C code, I happened upon parsing, and it was amazing. Turns out that people have been manually parsing many things since the beginning. Who would have known!
+
+Parsing has perhaps gotten a bad rep, afterall, it seems like something that "should just work". Or at the very least, something that we should have tools for.
+
+Indeed, plenty tools were written in the 1970s and given silly names like Yacc and Bison. Presumably because these animals are related to the infamous GNU, the quintessential hoofed furball. (And perhaps also because the tools were useful for many arcane tasks like coding compilers for the multitude of chipset ASI's they had back then.)
+
+At a closer look, parsing isn't only about making the computer read JSON files or used by corporations to write C compilers, supposedly a common practice in the 70's and 80's. No, it owes it claim to fame to one of the most powerful programming paradigms that we moderns know very well: META programming.
+
+In an attempt to explain the importance of meta programming to a non-programmer, I'd point to the widespread usage of scripting languages like Python, JavaScript, Ruby, and the ancient titan Perl. Meta programming wasn't built into C, which lacks "reflection", a very relevant programming language feature.
+
+
+What even is meta programming?
+
+Meta programming is the ability to write the program THAT WRITES another program. This is admittedly a two-step process: First you write and execte code that writes a program, and finally you execute the output. Notice what we did there? We wrote a META program.
+
+With meta programming, you can just configure your (final) program, rather than writing it out in tedious detail. If all of this sounds a bit complicated, well, it is: Many meta programs are indeed incomprehensible to anyone but their authors, and their knowledge will die with them. Some meta programs are like convoluted math proofs written in a cottage in siberia that skipps way too many steps.
+
+Despite the obscurity trap, the enormous power of meta programming allows many things to be done in a quite smart and efficient way.
+
+Also McStas, a physics simulation package originally dating from 1997, was indeed written by people who held the power of META programming at their fingertips. Being a physics simulation, performance requirements dictated that McStas was written in C, not Perl, and thus the meta program had to output C code. Why not use C to write more C? This was a logical idea, and our chance we circle back to some of the furry animals mentioned above, specifically BISON and FLEX.
+
+The BISON/FLEX combo is known as a parser generator. It is not JUST a parser, nor is it JUST a generator. In fact, it is a parser that generates a parser. It acutally generates C source code for a parser. Let me break that down for you.
+
+In the BISON/FLEX system you write "grammar rules" that dictate how input text must be structured in terms of syntax - meaning words, sentences, sequences. For example, one would dictate that an email contains the following elements:
+
+email: greeting textbody farewell
+
+Breaking it down further, the "greeting" would be further defined as
+
+greeting: formality name
+
+Then we must go on to explain what "formality" and "name" refer to. Now it gets specific:
+
+formality: "Dear" OR "Hello"
+name: CAPITALIZED_IDENTIFIER
+
+Now CAPITALIZED_IDENTIFIER is any sequence of letters that starts with a capital letter. Ok now we know that "greeting" would be something like "Dear Joe" or "Hello Jane". (Or even "Dear Aslgzvdvd", but that problem and worse is considered to be on the user.) Notice how the rules are written in an abstract and beautiful way that resembles mathematics.
+
+
+But what is this all for?
+
+Imagine that you are an experimental physicist with sporadic access to highly expensive and configurable equipment. To not waste time or money, you very naturally resort to simulation before doing the actual experiment.
+
+In doing so, the simulation software is ALSO expected to have components, preferably some that match the experimental setup as closely as possible. You also don't have time to write the whole simulation program from scratch every time. (Which people still did for years, until better options like McStas were developed.)
+
+So what they did was, they created a way to CONFIGURE the simulation, and express the simulated instrument in terms of pre-written components, combined with tidbits of custom C code. The components themselves would be configurable, and it was easy to create new components to enter into the system.
+
+To keep it all neat and tight, they used BISON/FLEX to create a parser that would convert an instrument configuration file into a complete and finished simulation program for your exact instrument. Brilliant!
+
+
+
+
+
 

@@ -1,0 +1,142 @@
+
+
+
+251009:
+
+Output for the mcparse too vs. mcstas. Have created some contrived instrument files with errors
+in them. Errors we have all done, over the years.
+
+The mcstas version used is 3.5.32 and mcparse version 0.1.0 (tagged on github).
+
+Conclusion:
+
+In 5/6 cases, the error is registered by the mcstas and the line number with the
+error is printed correctly. The mcparse tool prints a comprehensive error message, the 
+line, column value, the line itself, and a marker to show the location of the error.
+
+ 
+
+
+1)
+
+File: test_02.instr
+Mistake: Missing start paranthesis after instrument name
+
+01-mcstas:
+
+ERROR: syntax error at line 5.
+McStas: 1 Errors encountered during parse of test_01.instr.
+
+01-mcparse:
+
+ERROR: Expected '(', got 'identifier'
+
+5,26| DEFINE INSTRUMENT PSI_DMC lambda=2.5666, R=0.87, R_curve=0.87, string filename="Na2Ca3Al2F14.laz")
+                                ^
+
+
+2)
+
+File: test_02.instr
+Mistake: Missing comma in INSTRUMENT parameter list
+
+02-mcstas:
+
+It passes, and the output file 'test_02.c' compiles with 'gcc test_02.c -lm'.
+
+Inspecting test_02.c reveals that the parameter R is not being generated. In this case, the
+output compiles, but running the binary yields an error:
+
+Error: Invalid value '2.5666 R = 0.87' for floating point parameter lambda (mcparmerror_double)
+       Change lambda default value in instrument definition.
+
+The sequence '2.5666 R=0.87' (missing a comma as compared with "2.5666, R=0.87') is not a
+valid "arithmetic expression", and thus not a valid default value.
+The mcparse tool is able to parse the default value correctly, and detect and display the error:
+
+02-mcparse:
+
+ERROR: Expected ',' or ')', got 'identifier'
+
+5,40| DEFINE INSTRUMENT PSI_DMC(lambda=2.5666 R=0.87, R_curve=0.87, string filename="Na2Ca3Al2F14.laz")
+                                              ^
+
+
+3)
+
+File: test_03.instr
+Mistake: Miss-spelled DECLARE as DECLARES
+
+03-mcstas:
+
+ERROR: syntax error at line 12.
+McStas: 1 Errors encountered during parse of test_03.instr.
+
+03-mcparse:
+
+ERROR: Expected 'DECLARE', 'INITIALIZE, 'TRACE' or 'DEPENDENCY got 'DECLARES'
+
+12,0| DECLARES
+      ^
+
+
+4)
+
+File: test_04.instr
+Mistake: INITIALIZE section before DECLARE section
+
+04-mcstas:
+
+ERROR: syntax error at line 19.
+McStas: 1 Errors encountered during parse of test_04.instr.
+
+04-mcparse:
+
+ERROR: Expected 'TRACE', got 'DECLARE'
+
+19,0| DECLARE 
+      ^
+
+
+5)
+
+File: test_05.instr
+Mistake: FINALLY section before TRACE
+
+05-mcstas:
+
+ERROR: syntax error at line 26.
+McStas: 1 Errors encountered during parse of test_05.instr.
+
+05-mcparse:
+
+ERROR: Expected 'TRACE', got 'FINALLY'
+
+26,0| FINALLY
+      ^
+
+
+6)
+
+File: test_06.instr
+Mistake: Missing default value after '=' when using COMPONENT
+
+06-mcstas:
+
+ERROR: syntax error at line 13.
+McStas: 1 Errors encountered during parse of test_06.instr.
+
+06-mcparse:
+
+ERROR: Expected arithmetic expression, got ','
+
+13,27|         yheight = /*0.156*/, xwidth = 0.126,
+                                  ^
+
+
+251001:
+
+./mcparse --instrs test/fail_tests/template.instr
+
+
+
