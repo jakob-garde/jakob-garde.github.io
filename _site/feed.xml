@@ -1,28 +1,28 @@
-<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" ><generator uri="https://jekyllrb.com/" version="3.10.0">Jekyll</generator><link href="http://localhost:4000/feed.xml" rel="self" type="application/atom+xml" /><link href="http://localhost:4000/" rel="alternate" type="text/html" /><updated>2025-10-14T10:07:39+02:00</updated><id>http://localhost:4000/feed.xml</id><title type="html">Portfolio</title><subtitle>Systems development</subtitle><entry><title type="html">Manually parsing the McStas DSL</title><link href="http://localhost:4000/2025/10/13/parser.html" rel="alternate" type="text/html" title="Manually parsing the McStas DSL" /><published>2025-10-13T00:00:00+02:00</published><updated>2025-10-13T00:00:00+02:00</updated><id>http://localhost:4000/2025/10/13/parser</id><content type="html" xml:base="http://localhost:4000/2025/10/13/parser.html"><![CDATA[<h1 id="text-parsing-is-fun">Text parsing is fun</h1>
+<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" ><generator uri="https://jekyllrb.com/" version="3.10.0">Jekyll</generator><link href="http://localhost:4000/feed.xml" rel="self" type="application/atom+xml" /><link href="http://localhost:4000/" rel="alternate" type="text/html" /><updated>2025-10-14T10:33:26+02:00</updated><id>http://localhost:4000/feed.xml</id><title type="html">Portfolio</title><subtitle>Systems development</subtitle><entry><title type="html">Manually parsing the McStas DSL</title><link href="http://localhost:4000/2025/10/13/parser.html" rel="alternate" type="text/html" title="Manually parsing the McStas DSL" /><published>2025-10-13T00:00:00+02:00</published><updated>2025-10-13T00:00:00+02:00</updated><id>http://localhost:4000/2025/10/13/parser</id><content type="html" xml:base="http://localhost:4000/2025/10/13/parser.html"><![CDATA[<h1 id="text-parsing-is-fun">Text parsing is fun</h1>
+
+<p><em>This article is a project description, but first, a disclaimer and some context. For years I worked on the open-source software package McStas as a core developer at DTU Physics (2015-2020), which is why I know so much about the McStas core software. Currently re-visiting the project on a completely volountary and independent basis. All statements below are thus reflections of my personal findings and opinions, and nothing more.</em></p>
 
 <p>Recently while researching and learning more C, I happened upon custom parsing and thought it was pretty cool. Turns out that people have been parsing many things manually since way back when, and done it very well.</p>
 
 <p>Parsing sometimes gets a bad rep afterall, and seems like a thing that “should just work”, something we should have tools for.</p>
 
-<p>Plenty tools were indeed written during the Bell Labs era and given names like Yacc or (later on) BisonP. These were ancestors of the infamous GNU, one of the most hoofed software animal coming out of the 1980’s.</p>
+<p>Plenty og tools were indeed written during the Bell Labs era and given names like Yacc or (later on) bison. These were ancestors of the infamous GNU, one of the most hoofed software animal coming out of the 1980’s.</p>
 
 <p>Yet at closer look, parsing is not just about reading JSON files or writing custom compilers, supposedly a common practice in those days. It probably owes its fame to one of the wildest  programming paradigms: META programming.</p>
 
-<p>In an attempt to explain the importance of meta programming to a non-programmer, I’d point to the widespread usage of scripting languages like Python, JavaScript, Ruby, and Perl. All very wide-spread and with a feature called “reflecting” which is notably lacking in C.</p>
+<p>If I were to explain the importance of meta programming to a non-programmer, I’d point to the widespread usage of scripting languages like Python, JavaScript, Ruby, and Perl. All very popular and with the “reflection” programming-language feature which is notably lacking in C.</p>
 
 <h1 id="what-is-meta-programming">What is META programming?</h1>
 
-<p>Meta programming means writing a program that writes ANOTHER program. This is admittedly a two-step process: First you write and execute a program that outputs the source code for another program, which is compiled and executed separately, and often automatically.</p>
+<p>Meta programming means writing a program that writes another program. This is admittedly a two-step process: First you write and execute a program that outputs the source code for another program, which is compiled and executed separately, and often automatically.</p>
 
-<p>With meta programming we may configure certain things abstractly, let the meta process take its course, and reap the automated benefits, rather than writing everything “down-stream” out in tedious detail, tedious - but necessary.</p>
+<p>With meta programming we may configure certain things abstractly, let the meta process take its course, and reap the automated benefits. This can be much better than writing everything out in tedious detail, in situations where there could be a lot of repetition, or when multiple lines of code is needed to do simple things.</p>
 
 <p>If this sounds a bit complicated, well, it is: Meta programs can become incomprehensible to anyone but their authors. Some resemble convoluted math proofs that skip way too many steps, but I digress.</p>
 
 <p>Despite the potential for obscurity, meta programming comes with enormous power, and allows us to do many things that are quite clever and time-saving.</p>
 
 <h1 id="are-we-still-using-that">Are we still using that?</h1>
-
-<p>(I worked on the open-source software package McStas as a core developer, during my employment at DTU Physics 2015-2020, which is why I know so much about it.)</p>
 
 <p>Also McStas, a physics simulation package originally dating from 1997, was indeed written by people wielding the power of META. As a physics simulation, performance requirements dictated that it was written in C. Thus the meta program had to output C code.</p>
 
