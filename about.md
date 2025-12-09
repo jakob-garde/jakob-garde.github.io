@@ -4,11 +4,11 @@ title: About
 permalink: /about/
 ---
 
-![image tooltip here](/assets/resized.jpg){: style="float: right"}
+![Jakob Garde](/assets/resized.jpg){: style="float: right"}
 
 ### Jakob Garde
 
-Software and systems developer with over 15 years of experience.
+Software and systems developer.
 
 This page dives into and explores various side projects.
 
@@ -17,11 +17,7 @@ See my [linkedin] for details / CV.
 
 ### Inventing Wheels
 
-Recently I had the opportunity to work independently and develop new skills.
-
-For a tech-oriented person like me, coding and development can fill hours every day, and that is at least half the job.
-
-The best way to learn about wheels is to build them. And a great way to become a better programmer is to write a lot of code - and present the work.
+The best way to learn about wheels is to build them. And a great way to become a better programmer is to write a lot of code - and write about it.
 
 Here's my first article, it is about custom parsing and [meta-programming in C].
 
