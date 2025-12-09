@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" ><generator uri="https://jekyllrb.com/" version="3.10.0">Jekyll</generator><link href="http://localhost:4000/feed.xml" rel="self" type="application/atom+xml" /><link href="http://localhost:4000/" rel="alternate" type="text/html" /><updated>2025-12-09T10:05:07+01:00</updated><id>http://localhost:4000/feed.xml</id><title type="html">Portfolio</title><subtitle>Systems development</subtitle><entry><title type="html">Building on Legacy</title><link href="http://localhost:4000/2025/12/07/mctrace.html" rel="alternate" type="text/html" title="Building on Legacy" /><published>2025-12-07T00:00:00+01:00</published><updated>2025-12-07T00:00:00+01:00</updated><id>http://localhost:4000/2025/12/07/mctrace</id><content type="html" xml:base="http://localhost:4000/2025/12/07/mctrace.html"><![CDATA[<h1 id="mctrace">mctrace</h1>
+<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" ><generator uri="https://jekyllrb.com/" version="3.10.0">Jekyll</generator><link href="http://localhost:4000/feed.xml" rel="self" type="application/atom+xml" /><link href="http://localhost:4000/" rel="alternate" type="text/html" /><updated>2025-12-09T11:02:05+01:00</updated><id>http://localhost:4000/feed.xml</id><title type="html">Portfolio</title><subtitle>Systems development</subtitle><entry><title type="html">Building on Legacy</title><link href="http://localhost:4000/2025/12/07/mctrace.html" rel="alternate" type="text/html" title="Building on Legacy" /><published>2025-12-07T00:00:00+01:00</published><updated>2025-12-07T00:00:00+01:00</updated><id>http://localhost:4000/2025/12/07/mctrace</id><content type="html" xml:base="http://localhost:4000/2025/12/07/mctrace.html"><![CDATA[<h1 id="mctrace">mctrace</h1>
 
 <p><em>A few years ago I worked on the open-source software package McStas at DTU Physics (2015-2020). Recently I have been re-visiting the software package as a fun hobby and learning experience. The following is a reflection of my own personal opinions, and nothing more.</em></p>
 
@@ -48,7 +48,8 @@ existing functionality or achieve feature-parity as a baseline. Rather, it’s a
 
 <p>You may notice that while rays of many colours hit the monochromator, only certain colours escape towards the sample component.</p>
 
-<p><img src="/assets/04_mono.png" alt="Monochromator" style="" /></p>
+<p><img src="/assets/04_mono.png" alt="Monochromator-autumn" style="" />
+<img src="/assets/04b_monochromator_jet.png" alt="Monochromator-jet" style="" /></p>
 
 <h3 id="example-visualize-particles-that-reach-a-component">Example: Visualize particles that reach a component</h3>
 
@@ -175,7 +176,6 @@ it is easy to debug both the legacy component- and engine code, as well as the a
 <p>4) Known Bugs</p>
 
 <ul>
-  <li>the program can occationally crash due to a library bug</li>
   <li>the Monitor_nD component simply does not capture data as it should</li>
   <li>win touchpad can be wonky, mouse wheel is fine</li>
 </ul>]]></content><author><name></name></author><summary type="html"><![CDATA[mctrace]]></summary></entry><entry><title type="html">Manually parsing the McStas DSL</title><link href="http://localhost:4000/2025/10/13/parser.html" rel="alternate" type="text/html" title="Manually parsing the McStas DSL" /><published>2025-10-13T00:00:00+02:00</published><updated>2025-10-13T00:00:00+02:00</updated><id>http://localhost:4000/2025/10/13/parser</id><content type="html" xml:base="http://localhost:4000/2025/10/13/parser.html"><![CDATA[<h1 id="text-parsing-is-fun">Text parsing is fun</h1>
