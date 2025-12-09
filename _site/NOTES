@@ -1,0 +1,4 @@
+bundle info --path minima
+
+bundle exec jekyll serve
+

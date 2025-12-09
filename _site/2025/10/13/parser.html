@@ -1,184 +1,63 @@
-<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" ><generator uri="https://jekyllrb.com/" version="3.10.0">Jekyll</generator><link href="http://localhost:4000/feed.xml" rel="self" type="application/atom+xml" /><link href="http://localhost:4000/" rel="alternate" type="text/html" /><updated>2025-12-09T10:05:07+01:00</updated><id>http://localhost:4000/feed.xml</id><title type="html">Portfolio</title><subtitle>Systems development</subtitle><entry><title type="html">Building on Legacy</title><link href="http://localhost:4000/2025/12/07/mctrace.html" rel="alternate" type="text/html" title="Building on Legacy" /><published>2025-12-07T00:00:00+01:00</published><updated>2025-12-07T00:00:00+01:00</updated><id>http://localhost:4000/2025/12/07/mctrace</id><content type="html" xml:base="http://localhost:4000/2025/12/07/mctrace.html"><![CDATA[<h1 id="mctrace">mctrace</h1>
+<!DOCTYPE html>
+<html lang="en"><head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1"><!-- Begin Jekyll SEO tag v2.8.0 -->
+<title>Manually parsing the McStas DSL | Portfolio</title>
+<meta name="generator" content="Jekyll v3.10.0" />
+<meta property="og:title" content="Manually parsing the McStas DSL" />
+<meta property="og:locale" content="en_US" />
+<meta name="description" content="Text parsing is fun" />
+<meta property="og:description" content="Text parsing is fun" />
+<link rel="canonical" href="http://localhost:4000/2025/10/13/parser.html" />
+<meta property="og:url" content="http://localhost:4000/2025/10/13/parser.html" />
+<meta property="og:site_name" content="Portfolio" />
+<meta property="og:type" content="article" />
+<meta property="article:published_time" content="2025-10-13T00:00:00+02:00" />
+<meta name="twitter:card" content="summary" />
+<meta property="twitter:title" content="Manually parsing the McStas DSL" />
+<script type="application/ld+json">
+{"@context":"https://schema.org","@type":"BlogPosting","dateModified":"2025-10-13T00:00:00+02:00","datePublished":"2025-10-13T00:00:00+02:00","description":"Text parsing is fun","headline":"Manually parsing the McStas DSL","mainEntityOfPage":{"@type":"WebPage","@id":"http://localhost:4000/2025/10/13/parser.html"},"url":"http://localhost:4000/2025/10/13/parser.html"}</script>
+<!-- End Jekyll SEO tag -->
+<link rel="stylesheet" href="/assets/main.css"><link type="application/atom+xml" rel="alternate" href="http://localhost:4000/feed.xml" title="Portfolio" /><!-- Google tag (gtag.js) -->
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-K89N784GJJ"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
 
-<p><em>A few years ago I worked on the open-source software package McStas at DTU Physics (2015-2020). Recently I have been re-visiting the software package as a fun hobby and learning experience. The following is a reflection of my own personal opinions, and nothing more.</em></p>
+    gtag('config', 'G-K89N784GJJ');
+  </script>
 
-<p>Legacy software sometimes gets burried in layers of newer software.</p>
+</head>
+<body><header class="site-header" role="banner">
 
-<p>That’s certainly a good thing, becuase changing what’s underneath can be risky. In the case of physics simulation code, obscure and disastrous 
-bugs could be introduced. We’d rather build new features.</p>
+  <div class="wrapper"><a class="site-title" rel="author" href="/">Portfolio</a><nav class="site-nav">
+        <input type="checkbox" id="nav-trigger" class="nav-trigger" />
+        <label for="nav-trigger">
+          <span class="menu-icon">
+            <svg viewBox="0 0 18 15" width="18px" height="15px">
+              <path d="M18,1.484c0,0.82-0.665,1.484-1.484,1.484H1.484C0.665,2.969,0,2.304,0,1.484l0,0C0,0.665,0.665,0,1.484,0 h15.032C17.335,0,18,0.665,18,1.484L18,1.484z M18,7.516C18,8.335,17.335,9,16.516,9H1.484C0.665,9,0,8.335,0,7.516l0,0 c0-0.82,0.665-1.484,1.484-1.484h15.032C17.335,6.031,18,6.696,18,7.516L18,7.516z M18,13.516C18,14.335,17.335,15,16.516,15H1.484 C0.665,15,0,14.335,0,13.516l0,0c0-0.82,0.665-1.483,1.484-1.483h15.032C17.335,12.031,18,12.695,18,13.516L18,13.516z"/>
+            </svg>
+          </span>
+        </label>
 
-<h2 id="what-if-re-visiting-old-code-is-exactly-what-unlocks-new-possibilities">What if re-visiting old code is exactly what unlocks new possibilities?</h2>
+        <div class="trigger"><a class="page-link" href="/about/">About</a></div>
+      </nav></div>
+</header>
+<main class="page-content" aria-label="Content">
+      <div class="wrapper">
+        <article class="post h-entry" itemscope itemtype="http://schema.org/BlogPosting">
 
-<p>This project is a vertical slice. It is not an attempt to re-implement
-existing functionality or achieve feature-parity as a baseline. Rather, it’s an attempt to show what is possible.</p>
+  <header class="post-header">
+    <h1 class="post-title p-name" itemprop="name headline">Manually parsing the McStas DSL</h1>
+    <p class="post-meta">
+      <time class="dt-published" datetime="2025-10-13T00:00:00+02:00" itemprop="datePublished">Oct 13, 2025
+      </time></p>
+  </header>
 
-<p>It combines the functionality of three or four existing tools into one, and adds a number of new features and many more possibilities. It loads and runs much faster and distribution is simple.</p>
-
-<p>Above all, it shows how to build completely new functionality, including features that would be very inconvenient to get in other ways.</p>
-
-<p>The mctrace binary compiles from source and takes up a few MB for the executable, which is distributed along with a thin platform abstraction layer (glew/glfw). Due to the necessity of compiling on Windows with gcc, they couldn’t be statically linked, but are included in the zip.</p>
-
-<ul>
-  <li>Source: <a href="https://github.com/jakob-garde/mctrace">mctrace</a></li>
-  <li>Win-x64 binary: <a href="https://github.com/jakob-garde/mctrace/release/x64-win/mctrace.zip">mctrace-win</a></li>
-  <li>Linux-x64: Clone the source repository above and run <code>build.sh</code>. Depends on <code>libglew-dev</code> and <code>libglfw3-dev</code>.</li>
-</ul>
-
-<p>Essentially this is a port of the neutron scattering instrument called PSI_DMC and its fifteen components. Porting more to the mctrace format is not an issue, since the generic pipeline is there. As mentioned above however, this is a tech demo / vertical slice, not a complete port, so I focused on this simple and illustrative instrument for the project.</p>
-
-<p>Code generation using my mcparse generator:</p>
-
-<ul>
-  <li>Source: <a href="https://github.com/jakob-garde/mcparse">mcparse</a></li>
-</ul>
-
-<p>The essential port takes place under the hood, but the most visible and attention-demanding is the visualization, and here’s some fun examples:</p>
-
-<h3 id="example-mouse-hover-and-selection-boxes">Example: Mouse-hover and selection boxes</h3>
-
-<p>When moving the mouse across the screen above a component, a box will appear around it, and its name is displayed in a tool-tip. By left-clicking, the component will become selected. This causes an info box to appear listing its name, type and parameter values.</p>
-
-<p>When the Monitors tab is selected, a 1D or 2D plot is also displayed, showing current trace data. (NOTE: To see the plots, start the particle trace in the Simulation tab.)</p>
-
-<p><img src="/assets/10_mon_1D.png" alt="Sample monitor" style="" /></p>
-
-<h3 id="example-coloured-rays-by-lambda">Example: Coloured rays by Lambda</h3>
-
-<p>As a fun visualization effect, I coloured the neutron trajectories by wavelength, which gives a nice effect when looking at the monochromator. (The monochromator is akin to a “prism” for visible light.)</p>
-
-<p>You may notice that while rays of many colours hit the monochromator, only certain colours escape towards the sample component.</p>
-
-<p><img src="/assets/04_mono.png" alt="Monochromator" style="" /></p>
-
-<h3 id="example-visualize-particles-that-reach-a-component">Example: Visualize particles that reach a component</h3>
-
-<p>If the trace button has been clicked in the Simulation tab, neutron trajectories will be shown in the trace tab. The shown “rays”/trajectories are a random selection of the particles that reach the selected component.</p>
-
-<p>This lets us investigate sub-sets of the traced rays by clicking on various components. For example, try clicking the detector (the large banana-shaped component at the end of the instrument) to see a fan of rays escaping the sample.</p>
-
-<p><img src="/assets/05_sample_ray.png" alt="Sample beam" style="" />
-<img src="/assets/06_overview_detector.png" alt="Scattered" style="" /></p>
-
-<h1 id="list-of-features">List of Features</h1>
-
-<p>Below is a tentative list of the notable features implemented in this project. It is separated into three sections, showcasing the simulation core, visualization and code structural aspects.</p>
-
-<h2 id="simulation-engine">Simulation engine</h2>
-
-<p>The legacy mccode simulation engine infrastructure has been re-implemented and modernized.</p>
-
-<p>1) Components (tested on 15 ported components)</p>
-
-<ul>
-  <li>generated .h files, one for each .comp file, wrapping create/init/trace/save/finally functions</li>
-  <li>component base class (/header struct) used by the app layer for all component access</li>
-  <li>generic parameter info available from the base component struct</li>
-  <li>types: ported 15 components to C++</li>
-  <li>type-agnostic wrapper for the above calls in a comps_meta.h</li>
-  <li>transforms translation from 4x4 to legacy sim-compatible 3x3 + position</li>
-</ul>
-
-<p>2) Instruments (tested for the PSI_DMC configurarion)</p>
-
-<ul>
-  <li>one generated instument .h file for each .instr file with create/init/configure/finally functions</li>
-  <li>generated specific instrument struct</li>
-  <li>instrument wrapper struct / base class</li>
-  <li>generated parameter hooks (name, value ptr)</li>
-  <li>instrument initialization and configuration function with:
-    <ul>
-      <li>component creation and init</li>
-      <li>component transforms given instr params, comp params and AT/ROT with RELATIVE/ABSOLUTE</li>
-    </ul>
-  </li>
-</ul>
-
-<p>3) Simulation</p>
-
-<ul>
-  <li>particle propagation loop (runs in a worker thread)</li>
-  <li>particle propagation pause/reset using the current instrument init</li>
-  <li>simulation libraries re-packaged into simcore.h/simlib.h</li>
-  <li>component display hooks: A callback fired by all components during DISPLAY</li>
-  <li>component plot/monitor data hooks: A callback fired during SAVE</li>
-  <li>particle trace “events” hooks: A callback for STATE, SCATTER, ABSORB</li>
-</ul>
-
-<h2 id="visualization-engine">Visualization Engine</h2>
-
-<p>The instrument is viewed as component “display” wireframes in 3D combined with info-boxes.</p>
-
-<p>1) Wireframe display</p>
-
-<ul>
-  <li>component wireframes</li>
-  <li>full instrument view of all components hovering above a scale grid</li>
-  <li>component mouse-selection and next/prev component buttons</li>
-  <li>3D camera pan/zoom</li>
-  <li>dbl-click and enter-press to focus the camera view on the selected component</li>
-  <li>mouse hover tooltip showing component name</li>
-  <li>component selection infobox with name/type, absolute at/rot and current parameter values</li>
-  <li>separate view modes for monitors vs. physical components</li>
-</ul>
-
-<p>2) Monitor plot-data</p>
-
-<ul>
-  <li>monitor 2D data to texture using color maps and z-max</li>
-  <li>1D and 2D monitor plot with component name and parameter values when selected</li>
-  <li>1D and 2D overview plots with component name</li>
-  <li>component monitor data reset</li>
-</ul>
-
-<p>3) Particle trajectories</p>
-
-<ul>
-  <li>particle propagation with pause/reset runs in worker thread</li>
-  <li>particle trace recording (SCAT/STATE/ABSORB events)</li>
-  <li>particle trajectories bundled by non-biased/random component-reached</li>
-  <li>view trajectories by selected component</li>
-</ul>
-
-<h2 id="structural">Structural</h2>
-
-<p>The app compiles in less than a second with no intermediary build steps, and
-it is easy to debug both the legacy component- and engine code, as well as the application layers.</p>
-
-<p>1) Code structure</p>
-
-<ul>
-  <li>minimal code-generated sections</li>
-  <li>separate legacy, application and visualization layers</li>
-  <li>eliminated most legacy globals, hereby enabling consecutive runs of arbitrary simulation configurations</li>
-  <li>core simulation runtime libraries extracted into separate units that are included by default</li>
-</ul>
-
-<p>2) Memory management</p>
-
-<ul>
-  <li>instrument configuration state is layed-out sequentially in a localized “arena” container</li>
-  <li>containers also manage the lifetime of a simulation</li>
-  <li>separate instrument configs are managed individually</li>
-  <li>components often call malloc() during initialization and free() during finalize (unchanged)</li>
-</ul>
-
-<p>3) Extensibility</p>
-
-<ul>
-  <li>very easy to replace/tweak the particle propagation algorithm</li>
-  <li>much improved optimization potential</li>
-  <li>arbitrary and dynamic particle caching</li>
-  <li>dynamic configurations that go beyond the DSL</li>
-  <li>include arbitrary C++ code</li>
-</ul>
-
-<p>4) Known Bugs</p>
-
-<ul>
-  <li>the program can occationally crash due to a library bug</li>
-  <li>the Monitor_nD component simply does not capture data as it should</li>
-  <li>win touchpad can be wonky, mouse wheel is fine</li>
-</ul>]]></content><author><name></name></author><summary type="html"><![CDATA[mctrace]]></summary></entry><entry><title type="html">Manually parsing the McStas DSL</title><link href="http://localhost:4000/2025/10/13/parser.html" rel="alternate" type="text/html" title="Manually parsing the McStas DSL" /><published>2025-10-13T00:00:00+02:00</published><updated>2025-10-13T00:00:00+02:00</updated><id>http://localhost:4000/2025/10/13/parser</id><content type="html" xml:base="http://localhost:4000/2025/10/13/parser.html"><![CDATA[<h1 id="text-parsing-is-fun">Text parsing is fun</h1>
+  <div class="post-content e-content" itemprop="articleBody">
+    <h1 id="text-parsing-is-fun">Text parsing is fun</h1>
 
 <p><em>For years I worked on the open-source software package McStas as a core developer at DTU Physics (2015-2020), which is why I know so much about the McStas core software. Currently re-visiting the project on a completely volountary and independent basis. All statements below are thus reflections of my personal findings and opinions, and nothing more.</em></p>
 
@@ -349,4 +228,35 @@ it is easy to debug both the legacy component- and engine code, as well as the a
 
 <p>The physics is the same, yet now with many more possible capabilities.</p>
 
-<p>So, what’s the catch? The production/release version is still on the horizon. Realizing it would require a degree of funding and community support. So far the project has been a lot of fun and very satisfying, I learned a whole lot, and hereby consider the McStas DSL wheel re-invented!</p>]]></content><author><name></name></author><summary type="html"><![CDATA[Text parsing is fun]]></summary></entry></feed>
+<p>So, what’s the catch? The production/release version is still on the horizon. Realizing it would require a degree of funding and community support. So far the project has been a lot of fun and very satisfying, I learned a whole lot, and hereby consider the McStas DSL wheel re-invented!</p>
+
+
+  </div><a class="u-url" href="/2025/10/13/parser.html" hidden></a>
+</article>
+
+      </div>
+    </main><footer class="site-footer h-card">
+  <data class="u-url" href="/"></data>
+
+  <div class="wrapper">
+
+    <div class="footer-col-wrapper">
+      <div class="footer-col footer-col-1">
+        <ul class="contact-list">
+          <li class="p-name">Portfolio</li><li><a class="u-email" href="mailto:jakob.garde@gmail.com">jakob.garde@gmail.com</a></li></ul>
+      </div>
+
+      <div class="footer-col footer-col-2"><ul class="social-media-list"></ul>
+</div>
+
+      <div class="footer-col footer-col-3">
+        <p>Systems development</p>
+      </div>
+    </div>
+
+  </div>
+
+</footer>
+</body>
+
+</html>
