@@ -1,6 +1,6 @@
-<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" ><generator uri="https://jekyllrb.com/" version="3.10.0">Jekyll</generator><link href="http://localhost:4000/feed.xml" rel="self" type="application/atom+xml" /><link href="http://localhost:4000/" rel="alternate" type="text/html" /><updated>2025-12-09T12:09:46+01:00</updated><id>http://localhost:4000/feed.xml</id><title type="html">Portfolio</title><subtitle>Systems development</subtitle><entry><title type="html">Building on Legacy</title><link href="http://localhost:4000/2025/12/07/mctrace.html" rel="alternate" type="text/html" title="Building on Legacy" /><published>2025-12-07T00:00:00+01:00</published><updated>2025-12-07T00:00:00+01:00</updated><id>http://localhost:4000/2025/12/07/mctrace</id><content type="html" xml:base="http://localhost:4000/2025/12/07/mctrace.html"><![CDATA[<h1 id="mctrace">mctrace</h1>
+<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" ><generator uri="https://jekyllrb.com/" version="3.10.0">Jekyll</generator><link href="http://localhost:4000/feed.xml" rel="self" type="application/atom+xml" /><link href="http://localhost:4000/" rel="alternate" type="text/html" /><updated>2025-12-09T14:22:42+01:00</updated><id>http://localhost:4000/feed.xml</id><title type="html">Portfolio</title><subtitle>Systems development</subtitle><entry><title type="html">Building on Legacy</title><link href="http://localhost:4000/2025/12/07/mctrace.html" rel="alternate" type="text/html" title="Building on Legacy" /><published>2025-12-07T00:00:00+01:00</published><updated>2025-12-07T00:00:00+01:00</updated><id>http://localhost:4000/2025/12/07/mctrace</id><content type="html" xml:base="http://localhost:4000/2025/12/07/mctrace.html"><![CDATA[<h1 id="mctrace">mctrace</h1>
 
-<p><em>A few years ago I worked on the open-source software package McStas at DTU Physics (2015-2020). Recently I have been re-visiting the software package as a fun hobby and learning experience. The following is a reflection of my own personal opinions, and nothing more.</em></p>
+<p><em>A few years ago I worked on the open-source software package McStas at DTU Physics (2015-2020). For the official project, see mccode.org. Recently I have been re-visiting the software package as a fun hobby and learning experience. The following is a reflection of my own personal opinions, and nothing more.</em></p>
 
 <p>Legacy software sometimes gets burried in layers of newer software.</p>
 
@@ -21,7 +21,6 @@ existing functionality or achieve feature-parity as a baseline. Rather, it’s a
 <ul>
   <li>Source: <a href="https://github.com/jakob-garde/mctrace">mctrace</a></li>
   <li>Win-x64 binary: <a href="https://github.com/jakob-garde/mctrace/raw/refs/heads/main/release/x64-win/mctrace-0.1.0.zip">mctrace-win</a></li>
-  <li>Linux-x64: Clone the source repository above and run <code>build.sh</code>. Depends on <code>libglew-dev</code> and <code>libglfw3-dev</code>.</li>
 </ul>
 
 <p>Essentially this is a port of the neutron scattering instrument called PSI_DMC and its fifteen components. Porting more to the mctrace format is not an issue, since the generic pipeline is there. As mentioned above however, this is a tech demo / vertical slice, not a complete port, so I focused on this simple and illustrative instrument for the project.</p>
@@ -62,7 +61,7 @@ existing functionality or achieve feature-parity as a baseline. Rather, it’s a
 
 <h1 id="list-of-features">List of Features</h1>
 
-<p>Below is a tentative list of the notable features implemented in this project. It is separated into three sections, showcasing the simulation core, visualization and code structural aspects.</p>
+<p>Below is a tentative list of the notable features implemented in this project. It is separated into three sections, showcasing the simulation core, visualization and code structure.</p>
 
 <h2 id="simulation-engine">Simulation engine</h2>
 
@@ -89,7 +88,7 @@ existing functionality or achieve feature-parity as a baseline. Rather, it’s a
   <li>instrument initialization and configuration function with:
     <ul>
       <li>component creation and init</li>
-      <li>component transforms given instr params, comp params and AT/ROT with RELATIVE/ABSOLUTE</li>
+      <li>component transforms given instr params, comp params and AT/ROT with relative/absolute</li>
     </ul>
   </li>
 </ul>
@@ -102,7 +101,7 @@ existing functionality or achieve feature-parity as a baseline. Rather, it’s a
   <li>simulation libraries re-packaged into simcore.h/simlib.h</li>
   <li>component display hooks: A callback fired by all components during DISPLAY</li>
   <li>component plot/monitor data hooks: A callback fired during SAVE</li>
-  <li>particle trace “events” hooks: A callback for STATE, SCATTER, ABSORB</li>
+  <li>particle trace “events” hooks: A callback for state/scatter/absorb events</li>
 </ul>
 
 <h2 id="visualization-engine">Visualization Engine</h2>
@@ -115,17 +114,18 @@ existing functionality or achieve feature-parity as a baseline. Rather, it’s a
   <li>component wireframes</li>
   <li>full instrument view of all components hovering above a scale grid</li>
   <li>component mouse-selection and next/prev component buttons</li>
-  <li>3D camera pan/zoom</li>
+  <li>3D camera pan/zoom using the mouse</li>
   <li>dbl-click and enter-press to focus the camera view on the selected component</li>
   <li>mouse hover tooltip showing component name</li>
   <li>component selection infobox with name/type, absolute at/rot and current parameter values</li>
   <li>separate view modes for monitors vs. physical components</li>
+  <li>nagivate the UI using left/right/tab/space key strokes</li>
 </ul>
 
 <p>2) Monitor plot-data</p>
 
 <ul>
-  <li>monitor 2D data to texture using color maps and z-max</li>
+  <li>monitor 2D data written to texture arrays using color maps</li>
   <li>1D and 2D monitor plot with component name and parameter values when selected</li>
   <li>1D and 2D overview plots with component name</li>
   <li>component monitor data reset</li>
@@ -135,9 +135,9 @@ existing functionality or achieve feature-parity as a baseline. Rather, it’s a
 
 <ul>
   <li>particle propagation with pause/reset runs in worker thread</li>
-  <li>particle trace recording (SCAT/STATE/ABSORB events)</li>
-  <li>particle trajectories bundled by non-biased/random component-reached</li>
-  <li>view trajectories by selected component</li>
+  <li>particle trace recording (state/scatter/absorb events)</li>
+  <li>particle trajectories bundled by component-reached (non-biased)</li>
+  <li>view particle trajectories by selecting a component</li>
 </ul>
 
 <h2 id="structural">Structural</h2>
@@ -157,9 +157,9 @@ it is easy to debug both the legacy component- and engine code, as well as the a
 <p>2) Memory management</p>
 
 <ul>
-  <li>instrument configuration state is layed-out sequentially in a localized “arena” container</li>
-  <li>containers also manage the lifetime of a simulation</li>
-  <li>separate instrument configs are managed individually</li>
+  <li>instrument configuration state is layed-out sequentially in a localized “arena” containers</li>
+  <li>containers also manage the lifetime of a trace-simulation</li>
+  <li>separate instrument configs are managed individually with individual init/finally life cycles</li>
   <li>components often call malloc() during initialization and free() during finalize (unchanged)</li>
 </ul>
 
