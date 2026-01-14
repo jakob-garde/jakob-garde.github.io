@@ -8,20 +8,16 @@ permalink: /about/
 
 ### Jakob Garde
 
-Software and systems developer.
+Generalist Software and Systems developer.
 
-This page dives into and explores various side projects.
+This page explores various side projects.
 
 See my [linkedin] for details / CV.
 
 
 ### Inventing Wheels
 
-The best way to learn about wheels is to build them. And a great way to become a better programmer is to write a lot of code - and write about it.
-
-Here's my first article, it is about custom parsing and [meta-programming in C].
-
-
+The best way to learn more about how software works, is to build a version of it.
 
 Project source code is posted [on github].
 
