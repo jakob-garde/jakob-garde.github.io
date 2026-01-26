@@ -1,4 +1,185 @@
-<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" ><generator uri="https://jekyllrb.com/" version="3.10.0">Jekyll</generator><link href="http://localhost:4000/feed.xml" rel="self" type="application/atom+xml" /><link href="http://localhost:4000/" rel="alternate" type="text/html" /><updated>2026-01-14T09:18:09+01:00</updated><id>http://localhost:4000/feed.xml</id><title type="html">Projects</title><subtitle>Systems development</subtitle><entry><title type="html">Building on Legacy</title><link href="http://localhost:4000/2025/12/07/mctrace.html" rel="alternate" type="text/html" title="Building on Legacy" /><published>2025-12-07T00:00:00+01:00</published><updated>2025-12-07T00:00:00+01:00</updated><id>http://localhost:4000/2025/12/07/mctrace</id><content type="html" xml:base="http://localhost:4000/2025/12/07/mctrace.html"><![CDATA[<h1 id="mctrace">mctrace</h1>
+<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" ><generator uri="https://jekyllrb.com/" version="3.10.0">Jekyll</generator><link href="http://localhost:4000/feed.xml" rel="self" type="application/atom+xml" /><link href="http://localhost:4000/" rel="alternate" type="text/html" /><updated>2026-01-26T15:11:18+01:00</updated><id>http://localhost:4000/feed.xml</id><title type="html">Projects</title><subtitle>Systems development</subtitle><entry><title type="html">Good Code Evolves from Clunky Code</title><link href="http://localhost:4000/2026/01/26/evolves.html" rel="alternate" type="text/html" title="Good Code Evolves from Clunky Code" /><published>2026-01-26T00:00:00+01:00</published><updated>2026-01-26T00:00:00+01:00</updated><id>http://localhost:4000/2026/01/26/evolves</id><content type="html" xml:base="http://localhost:4000/2026/01/26/evolves.html"><![CDATA[<p>Ever thought to yourself; <em>Hold on, this code is objectively bad.</em> But you still don’t feel bad about it? Then you might be on the right track to writing better code!</p>
+
+<h2 id="programming-is-a-lot-like-writing">Programming is a lot like writing</h2>
+
+<p>There’s the well-known trick in writing of <em>don’t edit, but edit later</em>. The idea is to get a draft on the page that can be improved into the final document.</p>
+
+<p>In programming we have similar processes, for example code compression or <a href="https://caseymuratori.com/blog_0015">semantic compression</a>. Others like to talk about refactoring, or say <em>iterate and integrate</em>. In Denmark, a computer science meme demands that code must be written three times to be good:</p>
+
+<p>When learning new things, experimenting with techniques and searching in broad strokes, we just don’t know how best to write our program.</p>
+
+<p>Once we have written that first version, we see major vectors of improvement. This calls for a re-write which results in a much better version-2, but having written the program twice, we now finally see the perfect third way, a flexible and simple path that solves everything elegantly. This calls for yet another re-write. Only when that is complete, will the program be considered as good as it can get (…)</p>
+
+<p>Product owners tend to cringe when programmers talk about a re-write, and programmers tend to cringe when product owners request yet another un-planned feature update to legacy pasta. Of course, nobody wants un-maintainable spaghetti code.</p>
+
+<p>Here is a possible path to badly structured code: The project was going great, we moved fast and iterated on an early version of code that the programmer hadn’t written multiple times before. This lead to bad, early decisions getting locked-in for life.</p>
+
+<p>Therefore we should consider front-loading some rewrites and refactoring work, long before it becomes absolutely necessary - or impossible.</p>
+
+<h2 id="procedural-map-generator">Procedural map generator</h2>
+
+<p>We are not getting into how it works. Instead, we are going to look at the process that brought the code from ugly to much better.</p>
+
+<p>Recently I have been dabbling in game development using the graphics librari <a href="https://www.raylib.com/cheatsheet/cheatsheet.html">raylib</a>. It is not a full game engine so I get to learn how to write all juicy game logics myself. Procedural generation is very intesting and accessible, so I wrote a random map generator using wavefunction collapse.</p>
+
+<p>Briefly, tiles are in a “superposition” of all outcomes. With each iteration, possible outcomes are reduced as neighbouring elements “collapse” into specific states and the map is complete. Eventually, every tile is resolved into one specific type.</p>
+
+<p>Here’s a demo: <a href="https://jakobgarde.itch.io/endless-forest-map-procgen-demo">wfc procgen</a></p>
+
+<p><img src="/assets/procgen_finished.png" alt="wfc procgen" /></p>
+
+<h2 id="five-stages-of-code">Five stages of code</h2>
+
+<p>The implementation is only a few hundred lines, but it went through at least five stages of development over a few days:</p>
+
+<ul>
+  <li>First working implementation</li>
+  <li>Total re-write</li>
+  <li>Refinement, abstraction</li>
+  <li>Extension with new features</li>
+  <li>Integration into the application environment</li>
+</ul>
+
+<p>The end goal is a unit or mini-library that depends only on base layers. It should be easy for the app as a whole to integrate, and allow for straight-forward testing and porting to other projects.</p>
+
+<p>The initial stage of getting the code working is crucial. That stage is called a “working implementation”, and it positions us very well for refining it into better code. By that mean code that is simpler, smaller, more readable and easy to test and debug.</p>
+
+<p>There is no way to “write code faster, better, the first time” without first writing that embarassingly ugly first working implementation.</p>
+
+<p>Consider Gall’s Law: “a working complex system is invariably found to have evolved from a simple system that worked”. 1970’s systems theory, a favourite decade of mine.</p>
+
+<p>We could ship this first version if we didn’t need more features on it - but as noted above, this is where spaghetti code comes from. Can we live with that? Maybe. Probably not.</p>
+
+<h3 id="stage-1-the-first-working-version">Stage 1: <em>The first, working version</em></h3>
+
+<p>We write the thing in the most direct or immediate way that comes to mind. The goal is to bring the code into a working state without using abstractions beyond the bare minimum. We shouldn’t try and think ahead at this point, just get it working.</p>
+
+<p>Some basic test code is needed so that we can see what happens. In my case, I had a random map on the left, and the generated map on the right. I would step through iterations of the algorithm by pressing SPACE, and debug info was printed directly into the map on the screen as needed. This test method was carried over into consecutive stages.</p>
+
+<p>Code: <a href="https://github.com/jakob-garde/endless/blob/main/article/wfc_stage_1.h">wfc_stage_1.h</a></p>
+
+<pre>
+/*
+First implementation:
+- It works: A great starting point!
+- The alg creates a tile map where flowers and rock tiles can not be adjacent
+- Explicit, clunky implementation that is specific and verbose
+- Tile superposition described as a clunky list of options
+- About ~300 lines
+
+Problems:
+- Difficult to extend, multiple code edits requred
+- Not usable, act as a learning step
+- Out-commented code here and there
+*/
+</pre>
+
+<p><img src="/assets/procgen_debug.png" alt="wfc procgen" /></p>
+
+<h3 id="stage-2-total-rewrite-from-scratch">Stage 2: <em>Total rewrite from scratch</em></h3>
+
+<p>With the experience gainned from writing the initial version, we can now do it all again. Instead of modifying and debugging, we just start over. This allows the design the data and code structures to alleviate some of the pitfalls we encountered writing the first implementation.</p>
+
+<p>The second stage should give the same output as the first.</p>
+
+<p>Code: <a href="https://github.com/jakob-garde/endless/blob/main/article/wfc_stage_2.h">wfc_stage_2.h</a></p>
+
+<pre>
+/*
+Total re-implementation:
+- Much clearer how the algorithm works
+- Reduction matrix to describe what tiles can not be next to each-other
+- Tile superposition described as an array of bools
+- Grid initialization using one function; written to passed memory arena
+- About ~200 lines
+
+Problems:
+- Clunky way to iterate the grid when "reducing" neighouring tile options
+- Clunky way to get neighbouring tiles
+- No recursive reduction will cause a bug in the future
+- Reduction matrix isn't abstracted correctly*/
+</pre>
+
+<h3 id="stage-3-refactor-and-isolate-complexity-hotspots">Stage 3: <em>Refactor and isolate complexity hotspots</em></h3>
+
+<p>We should improve the second implementation version by means of refactoring and code compression.</p>
+
+<p>At this stage the general code structure was ok, the clunkiness now being localized in implementations rather than baked into the superstructure. I prepared for the next stage by experimenting with the way that option exclusion was encoded (a complexity hotspot). Experiments also revealed the need for recursive update of auto-collapsed tiles.</p>
+
+<p>Code: <a href="https://github.com/jakob-garde/endless/blob/main/article/wfc_stage_3.h">wfc_stage_3.h</a></p>
+
+<pre>
+/*
+Refactoring, finding serious bugs and refining:
+- Adjacency matrix replaces "reducion" matrix
+- Adjacency matrix has Directional adjacency rules (although they have no effect at this stage)
+- Cleaner way to iterate tile neighbours: Using "kernel" arrays
+- Recursive collapse of tiles that reach entropy == 1 (one option) to update their neighbours
+- Uses much better variable names
+- Clearly separated lib, user and debug-draw sections
+- About ~220 lines from this point on
+
+Problems: 
+- Has the final serious bug: We collapse high-entropy tiles (incorrect) instead of low-entropy tiles
+*/
+</pre>
+
+<h3 id="stage-4-extend-with-new-features">Stage 4: <em>Extend with new features</em></h3>
+
+<p>We now have a solid foundation to build out the necessary complexity for implementing the features we actually want.</p>
+
+<p>Up until this stage, I was only working with three map tile types: Grass, flowers and rocks. Flowers and rocks could not be next to eachother, Now it was time to add five new til types: The forest tiles are: <em>up, down, left, right</em> and <em>inner</em>.</p>
+
+<p>Adding the adjacency rules for these extra tile types revealed a serious bug: When it selected a random tile for collapse, it chose those which had the most options available. The contracty is intuitively correct, it should collapse the tiles with the least options / most constraints first. The generator worked almost perfectly after that change.</p>
+
+<p>Finally the map with meadows and forest patches was generated correctly, I was happy with the features and looked to wrap it up.</p>
+
+<p>Code: <a href="https://github.com/jakob-garde/endless/blob/main/article/wfc_stage_4.h">wfc_stage_4.h</a></p>
+
+<pre>
+/*
+Directional adjacency rules applied to procgen a map with connected forest tiles
+- Directional adjacency rules active and working
+- Activate and implement five forest tile types
+- Select tiles to collapse by lowest-entropy rather than highest
+- About 220 lines for the separated "lib" code section
+- Correctly selects tiles to collapse using min-entropy
+- Everything seems to work perfectly
+
+Problems:
+- Not fit for integration into an app - global variables, type names are too generic, no explicit draw function
+- Adjacency rules are concise, but a little clunky to define (dontfix)
+- Rare placement bug
+*/
+</pre>
+
+<h3 id="stage-5-integration-into-the-code-base">Stage 5: <em>Integration into the code base</em></h3>
+
+<p>It is now time to think of the broader picture. How specific or general is this code? Are we using general names that might be misunderstood in the future?</p>
+
+<p>For example, “Grid” should be named “WFCGrid” because it doesn’t have any broader application. Also got rid of global variables that were convenient during implementation, but would certainly get in the way down the line. Global variables, badly implemented function and short-hand variable names: None of it really matters until we integrate / ship.</p>
+
+<p>Code: <a href="https://github.com/jakob-garde/endless/blob/main/article/wfc_stage_5.h">wfc_stage_5.h</a></p>
+
+<pre>
+/*
+Integration:
+- Rename types to be more specific
+- Do not depend on global variables
+- One function to run the algorithm (lib section)
+- Function to apply draw-able frame object to tiles, a post-run step (draw section)
+- Local user section is instead a few debug functions for potential future use
+- User code is now in the app, we are calling it from the outside 
+- Implementation of lib code is still about ~220 lines
+- Draw function was copy-pasted and adapted in user code 
+
+Problems: Can be changed later; and we are moving ahead at this point
+- Wanted refactor: Tile type is not great for use in the app
+- Wanted refactor: More convenient way of defining adjacency rules
+- Wanted extension: A way to stitch separately generated regions created by the algorithm
+- Wanted bugfix: Rare inconsistent placements can occur (research)
+*/
+</pre>]]></content><author><name></name></author><summary type="html"><![CDATA[Ever thought to yourself; Hold on, this code is objectively bad. But you still don’t feel bad about it? Then you might be on the right track to writing better code!]]></summary></entry><entry><title type="html">Building on Legacy</title><link href="http://localhost:4000/2025/12/07/mctrace.html" rel="alternate" type="text/html" title="Building on Legacy" /><published>2025-12-07T00:00:00+01:00</published><updated>2025-12-07T00:00:00+01:00</updated><id>http://localhost:4000/2025/12/07/mctrace</id><content type="html" xml:base="http://localhost:4000/2025/12/07/mctrace.html"><![CDATA[<h1 id="mctrace">mctrace</h1>
 
 <p><em>A few years ago I worked on the open-source software package McStas at DTU Physics (2015-2020). For the official project, see mccode.org. Recently I have been re-visiting the software package as a fun hobby and learning experience. The following is a reflection of my own personal opinions, and nothing more.</em></p>
 
