@@ -219,24 +219,25 @@ it is easy to debug both the legacy component- and engine code, as well as the a
   <li>instrument configuration state is layed-out sequentially in a localized “arena” containers</li>
   <li>containers also manage the lifetime of a trace-simulation</li>
   <li>separate instrument configs are managed individually with individual init/finally life cycles</li>
-  <li>components often call malloc() during initialization and free() during finalize (unchanged)</li>
+  <li>note that mcstas components often call malloc() during initialization and free() during finalize (unchanged)</li>
 </ul>
 
 <p>3) Extensibility</p>
 
 <ul>
-  <li>very easy to replace/tweak the particle propagation algorithm</li>
-  <li>much improved optimization potential</li>
-  <li>arbitrary and dynamic particle caching</li>
-  <li>dynamic configurations that go beyond the DSL</li>
+  <li>straight-forward to replace/tweak the particle propagation algorithm</li>
+  <li>improved optimization potential due to propagation code being accessible for development</li>
+  <li>bulk-propagation rather than single-propagation of particles seems an obvious next step</li>
+  <li>arbitrary, dynamic particle caching/logging</li>
+  <li>dynamic instrument configurations independent of the DSL</li>
   <li>include arbitrary C++ code</li>
 </ul>
 
 <p>4) Known Bugs</p>
 
 <ul>
-  <li>the Monitor_nD component simply does not capture data as it should</li>
-  <li>win touchpad can be wonky, mouse wheel is fine</li>
+  <li>Monitor_nD component does not capture data,  substituted with Cyl_monitor</li>
+  <li>win touchpad scrolling is wonky, mouse wheel works better</li>
 </ul>
 
 

@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" ><generator uri="https://jekyllrb.com/" version="3.10.0">Jekyll</generator><link href="http://localhost:4000/feed.xml" rel="self" type="application/atom+xml" /><link href="http://localhost:4000/" rel="alternate" type="text/html" /><updated>2026-01-26T15:11:18+01:00</updated><id>http://localhost:4000/feed.xml</id><title type="html">Projects</title><subtitle>Systems development</subtitle><entry><title type="html">Good Code Evolves from Clunky Code</title><link href="http://localhost:4000/2026/01/26/evolves.html" rel="alternate" type="text/html" title="Good Code Evolves from Clunky Code" /><published>2026-01-26T00:00:00+01:00</published><updated>2026-01-26T00:00:00+01:00</updated><id>http://localhost:4000/2026/01/26/evolves</id><content type="html" xml:base="http://localhost:4000/2026/01/26/evolves.html"><![CDATA[<p>Ever thought to yourself; <em>Hold on, this code is objectively bad.</em> But you still don’t feel bad about it? Then you might be on the right track to writing better code!</p>
+<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" ><generator uri="https://jekyllrb.com/" version="3.10.0">Jekyll</generator><link href="http://localhost:4000/feed.xml" rel="self" type="application/atom+xml" /><link href="http://localhost:4000/" rel="alternate" type="text/html" /><updated>2026-02-02T09:32:31+01:00</updated><id>http://localhost:4000/feed.xml</id><title type="html">Projects</title><subtitle>Systems development</subtitle><entry><title type="html">Good Code Evolves from Clunky Code</title><link href="http://localhost:4000/2026/01/26/evolves.html" rel="alternate" type="text/html" title="Good Code Evolves from Clunky Code" /><published>2026-01-26T00:00:00+01:00</published><updated>2026-01-26T00:00:00+01:00</updated><id>http://localhost:4000/2026/01/26/evolves</id><content type="html" xml:base="http://localhost:4000/2026/01/26/evolves.html"><![CDATA[<p>Ever thought to yourself; <em>Hold on, this code is objectively bad.</em> But you still don’t feel bad about it? Then you might be on the right track to writing better code!</p>
 
 <h2 id="programming-is-a-lot-like-writing">Programming is a lot like writing</h2>
 
@@ -341,24 +341,25 @@ it is easy to debug both the legacy component- and engine code, as well as the a
   <li>instrument configuration state is layed-out sequentially in a localized “arena” containers</li>
   <li>containers also manage the lifetime of a trace-simulation</li>
   <li>separate instrument configs are managed individually with individual init/finally life cycles</li>
-  <li>components often call malloc() during initialization and free() during finalize (unchanged)</li>
+  <li>note that mcstas components often call malloc() during initialization and free() during finalize (unchanged)</li>
 </ul>
 
 <p>3) Extensibility</p>
 
 <ul>
-  <li>very easy to replace/tweak the particle propagation algorithm</li>
-  <li>much improved optimization potential</li>
-  <li>arbitrary and dynamic particle caching</li>
-  <li>dynamic configurations that go beyond the DSL</li>
+  <li>straight-forward to replace/tweak the particle propagation algorithm</li>
+  <li>improved optimization potential due to propagation code being accessible for development</li>
+  <li>bulk-propagation rather than single-propagation of particles seems an obvious next step</li>
+  <li>arbitrary, dynamic particle caching/logging</li>
+  <li>dynamic instrument configurations independent of the DSL</li>
   <li>include arbitrary C++ code</li>
 </ul>
 
 <p>4) Known Bugs</p>
 
 <ul>
-  <li>the Monitor_nD component simply does not capture data as it should</li>
-  <li>win touchpad can be wonky, mouse wheel is fine</li>
+  <li>Monitor_nD component does not capture data,  substituted with Cyl_monitor</li>
+  <li>win touchpad scrolling is wonky, mouse wheel works better</li>
 </ul>]]></content><author><name></name></author><summary type="html"><![CDATA[mctrace]]></summary></entry><entry><title type="html">Manually parsing the McStas DSL</title><link href="http://localhost:4000/2025/10/13/parser.html" rel="alternate" type="text/html" title="Manually parsing the McStas DSL" /><published>2025-10-13T00:00:00+02:00</published><updated>2025-10-13T00:00:00+02:00</updated><id>http://localhost:4000/2025/10/13/parser</id><content type="html" xml:base="http://localhost:4000/2025/10/13/parser.html"><![CDATA[<h1 id="text-parsing-is-fun">Text parsing is fun</h1>
 
 <p><em>For years I worked on the open-source software package McStas as a core developer at DTU Physics (2015-2020), which is why I know so much about the McStas core software. Currently re-visiting the project on a completely volountary and independent basis. All statements below are thus reflections of my personal findings and opinions, and nothing more.</em></p>
