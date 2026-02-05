@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" ><generator uri="https://jekyllrb.com/" version="3.10.0">Jekyll</generator><link href="http://localhost:4000/feed.xml" rel="self" type="application/atom+xml" /><link href="http://localhost:4000/" rel="alternate" type="text/html" /><updated>2026-02-05T13:16:07+01:00</updated><id>http://localhost:4000/feed.xml</id><title type="html">Projects</title><subtitle>Systems development</subtitle><entry><title type="html">Vibing Guidelines</title><link href="http://localhost:4000/2026/02/05/vibin.html" rel="alternate" type="text/html" title="Vibing Guidelines" /><published>2026-02-05T00:00:00+01:00</published><updated>2026-02-05T00:00:00+01:00</updated><id>http://localhost:4000/2026/02/05/vibin</id><content type="html" xml:base="http://localhost:4000/2026/02/05/vibin.html"><![CDATA[<p><em>Remember coding guidelines? In the era of LLMs, coding is so 2025 and vibe coding is clearly the thing to do now. But how are we supposed to do it right? The lack of Vibe Coding Guidelines (TM) may lead to security issues, the lack of backups, accidental database deletion or sensitive data leaks!</em></p>
+<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" ><generator uri="https://jekyllrb.com/" version="3.10.0">Jekyll</generator><link href="http://localhost:4000/feed.xml" rel="self" type="application/atom+xml" /><link href="http://localhost:4000/" rel="alternate" type="text/html" /><updated>2026-02-05T13:25:35+01:00</updated><id>http://localhost:4000/feed.xml</id><title type="html">Projects</title><subtitle>Systems development</subtitle><entry><title type="html">Vibing Guidelines</title><link href="http://localhost:4000/2026/02/05/vibin.html" rel="alternate" type="text/html" title="Vibing Guidelines" /><published>2026-02-05T00:00:00+01:00</published><updated>2026-02-05T00:00:00+01:00</updated><id>http://localhost:4000/2026/02/05/vibin</id><content type="html" xml:base="http://localhost:4000/2026/02/05/vibin.html"><![CDATA[<p><em>Remember coding guidelines? In the era of LLMs, coding is so 2025 and vibe coding is clearly the thing to do now. But how are we supposed to do it right? The lack of Vibe Coding Guidelines (TM) may lead to security issues, the lack of backups, accidental database deletion or sensitive data leaks!</em></p>
 
 <p>LLMs can be a useful tool if handled correctly.</p>
 
@@ -8,31 +8,31 @@
 
 <p>We have all been there, read the hype articles, and the doom posts and so on and so forth. This is neither. To use any tool effective, we need to abide by certain principles. This is nothing new, and applies to everything from toothbrushes to chainsaws. In terms of using LLMs to generate code, many experienced developers have probably tried it and gotten lackluster results.</p>
 
-<p>Here’s my take on LLM usage for coding - YMMV. First, let’s take on the elephant in the room: Some LLMs are sleazy.</p>
+<p>Here’s my take on their usage for coding. First, let’s take on the elephant in the room: Some of them are kind of sleazy.</p>
 
 <ul>
-  <li>The LLM tends to endlessly stroke our egos.</li>
+  <li>LLMs tend to endlessly stroke our egos.</li>
 </ul>
 
 <p>Responses are verbose and full of fluff like “great idea”. Don’t fall for it, it is just trying to draw us in. We are better off keeping our egos out of the engineering process.</p>
 
 <ul>
-  <li>The LLM can’t do more than one thing at the time without being wrong.</li>
+  <li>LLMs can’t do more than one thing at the time without being wrong.</li>
 </ul>
 
 <p>The system will rarely say “does not compute” if our prompt isn’t specific enough. The more stuff it outputs, the more work this causes for us; in either reading and ignoring the output, or in accepting, verifying and testing it.</p>
 
 <ul>
-  <li>LLM’s can’t see the big picture.</li>
+  <li>LLMs don’t see the big picture.</li>
 </ul>
 
-<p>According to the hype disclaimer above, LLMs never demonstrated any real sense of purpose. The bigger the scope of your prompt, the harder it becomes to get an practical answer. We need to hold the purpose ourselves, or get sidetracked by the LLMs own less-relevant suggestions.</p>
+<p>According to the hype disclaimer above, LLMs never demonstrated any real sense of purpose. The bigger the scope of a prompt, the harder it becomes to get a practical answer. We need to hold the purpose ourselves or risk getting sidetracked by less-than-relevant suggestions.</p>
 
 <ul>
-  <li>The LLM tends to paint us into a corner.</li>
+  <li>Following LLM suggestions often paints us into a corner.</li>
 </ul>
 
-<p>The more suggestions we accept, the more we ma end up in an LLM-generated box and find ourselves in a bad spot, unable to backtrack. Thus we need to start over, losing time.</p>
+<p>The more suggestions we accept, the more we ma end up in an LLM-generated box and find ourselves in a bad spot, unable to backtrack. Thus we need to start over, losing time. Either that or we may forget to verify, losing time on something that was just plain wrong.</p>
 
 <p>Notice how losing time is a big pitfall when using these productivity-enhancing tools?</p>
 
